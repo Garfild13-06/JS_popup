@@ -1,15 +1,32 @@
-const modal = document.querySelector('.modal')
+function getCookie(name) {
+    try {
+        const pairs = document.cookie.split('; ')
+        const cookie = pairs.find(p => p.startsWith(name + '='))
+        return cookie.substring(name.length + 1)
+    } catch (e) {
+        return null
+    }
 
-const popupClosed = localStorage.getItem('popupClosed')
+}
+
+function setCookie(name, value) {
+    document.cookie = name + "=" + encodeURIComponent(value)
+}
+
+const modal = document.querySelector('.modal')
+const popupClosed = getCookie('popupClosed')
+
 if (popupClosed == null) {
     setTimeout(() => {
         modal.classList.add('modal_active')
-    }, 5000)
+    }, 2000)
 
     const modalClose = modal.querySelector('.modal__close')
     modalClose.addEventListener('click', () => {
         modal.classList.remove('modal_active')
-        localStorage.setItem('popupClosed', 'true')
+        setCookie('popupClosed', 'true')
     })
 }
+
+
 
